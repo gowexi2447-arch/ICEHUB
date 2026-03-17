@@ -1,313 +1,440 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>ICE,_ud</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Links</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+        body {
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 25%, #16213e 50%, #0f3460 75%, #1a1a2e 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            position: relative;
+            overflow-x: hidden;
+        }
 
-<style>
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial;
-}
+        /* Ambient glow overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 0, 255, 0.1) 0%, transparent 50%);
+            animation: rotate 30s linear infinite;
+            pointer-events: none;
+        }
 
-body{
-background:black;
-color:white;
-overflow:hidden;
-}
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
 
-/* ENTER SCREEN */
+        .container {
+            max-width: 800px;
+            width: 100%;
+            position: relative;
+            z-index: 10;
+        }
 
-#enter{
-position:fixed;
-width:100%;
-height:100%;
-background:black;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:40px;
-letter-spacing:4px;
-cursor:pointer;
-z-index:10;
-}
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: fadeInDown 1s ease-out;
+        }
 
-#enter:hover{
-color:#5865F2;
-}
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-/* PARTICLES */
+        .badge {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: rgba(0, 255, 157, 0.1);
+            border: 1px solid rgba(0, 255, 157, 0.3);
+            border-radius: 50px;
+            color: #00ff9d;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            animation: pulse 2s ease-in-out infinite;
+        }
 
-#particles-js{
-position:fixed;
-width:100%;
-height:100%;
-z-index:-1;
-}
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
 
-/* CENTER */
+        .title {
+            font-size: 4rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #ff00ff, #ff69b4, #ff00ff);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            animation: gradientText 3s ease infinite;
+            text-shadow: 0 0 80px rgba(255, 0, 255, 0.5);
+        }
 
-.container{
-height:100vh;
-display:flex;
-align-items:center;
-justify-content:center;
-}
+        @keyframes gradientText {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
 
-/* CARD */
+        .subtitle {
+            color: #b0b0b0;
+            font-size: 1.1rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+        }
 
-.card{
-background:rgba(20,20,20,0.9);
-padding:40px;
-border-radius:20px;
-text-align:center;
-backdrop-filter:blur(10px);
-box-shadow:0 0 40px rgba(0,0,0,0.8);
-animation:float 5s infinite ease-in-out;
-}
+        .stats {
+            color: #808080;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
 
-@keyframes float{
-0%{transform:translateY(0)}
-50%{transform:translateY(-10px)}
-100%{transform:translateY(0)}
-}
+        .cta-button {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 1rem 3rem;
+            background: linear-gradient(135deg, #ff00ff, #ff69b4);
+            color: white;
+            font-weight: 700;
+            font-size: 1rem;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 40px rgba(255, 0, 255, 0.4);
+            border: none;
+            cursor: pointer;
+        }
 
-/* PROFILE */
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 50px rgba(255, 0, 255, 0.6);
+        }
 
-.avatar{
-width:110px;
-height:110px;
-border-radius:50%;
-margin-bottom:10px;
-border:3px solid #5865F2;
-object-fit:cover;
-}
+        .links-section {
+            margin-top: 4rem;
+        }
 
-.name{
-font-size:24px;
-font-weight:bold;
-}
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: white;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
 
-.country{
-font-size:14px;
-color:#aaa;
-margin-top:4px;
-}
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            animation: fadeInUp 1s ease-out 0.3s backwards;
+        }
 
-.lang{
-font-size:13px;
-color:#777;
-margin-bottom:10px;
-}
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-/* COUNTER */
+        .link-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
 
-.counter{
-font-size:12px;
-color:#7cff7c;
-margin-bottom:15px;
-}
+        .link-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 0, 255, 0.1), rgba(255, 105, 180, 0.1));
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
 
-/* BUTTONS */
+        .link-card:hover::before {
+            opacity: 1;
+        }
 
-.buttons{
-display:flex;
-gap:12px;
-justify-content:center;
-}
+        .link-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 0, 255, 0.5);
+            box-shadow: 0 20px 60px rgba(255, 0, 255, 0.3);
+        }
 
-button{
-padding:10px 22px;
-border:none;
-border-radius:8px;
-background:#5865F2;
-color:white;
-font-weight:bold;
-cursor:pointer;
-transition:0.25s;
-}
+        .link-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 0 10px rgba(255, 0, 255, 0.5));
+        }
 
-button:hover{
-transform:scale(1.1);
-box-shadow:
-0 0 10px #5865F2,
-0 0 20px #5865F2,
-0 0 40px #5865F2;
-}
+        .link-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
 
-/* DOWNLOAD BAR */
+        .link-description {
+            color: #b0b0b0;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+        }
 
-.progress{
-width:100%;
-height:8px;
-background:#222;
-border-radius:10px;
-margin-top:15px;
-overflow:hidden;
-display:none;
-}
+        .link-arrow {
+            margin-top: 1rem;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 0, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ff00ff;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+            position: relative;
+            z-index: 1;
+        }
 
-.bar{
-height:100%;
-width:0%;
-background:#5865F2;
-}
+        .link-card:hover .link-arrow {
+            background: rgba(255, 0, 255, 0.4);
+            transform: translateX(5px);
+        }
 
-/* MUSIC */
+        .footer {
+            text-align: center;
+            margin-top: 4rem;
+            padding: 2rem;
+            color: #808080;
+            font-size: 0.9rem;
+        }
 
-.music{
-margin-top:25px;
-border-radius:10px;
-overflow:hidden;
-}
+        /* Responsive */
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2.5rem;
+            }
 
-</style>
+            .links-grid {
+                grid-template-columns: 1fr;
+            }
+
+            body {
+                padding: 1rem;
+            }
+        }
+
+        /* Particles effect */
+        .particle {
+            position: fixed;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 0, 255, 0.5);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: float 10s linear infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
 </head>
-
 <body>
+    <!-- Floating particles -->
+    <script>
+        for (let i = 0; i < 15; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 10 + 's';
+            particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+            document.body.appendChild(particle);
+        }
+    </script>
 
-<div id="enter" onclick="enterSite()">CLICK TO ENTER</div>
+    <!-- Hidden SoundCloud Player -->
+    <div id="soundcloudPlayer" style="position: fixed; bottom: -200px; left: -200px; width: 1px; height: 1px; opacity: 0; pointer-events: none;"></div>
 
-<div id="particles-js"></div>
+    <div class="container">
+        <div class="header">
+            <div class="badge">✨ Active & Ready</div>
+            <h1 class="title">ZOMBIE HUB</h1>
+            <p class="subtitle">use ai cheats across platforms</p>
+            <p class="stats">all you need is a working device</p>
+        </div>
 
-<div class="container">
+        <div class="links-section">
+            <h2 class="section-title">Featured Links</h2>
+            <div class="links-grid" id="linksContainer"></div>
+        </div>
 
-<div class="card">
+        <div class="footer">
+            Made with style • Edit links in the code
+        </div>
+    </div>
 
-<img class="avatar" src="https://yt3.googleusercontent.com/Q7h_gYI3YaAYfG7U5k8cLzmy73SIIknCcthpSz6NzcW2YXQQ3D2C794jZmYOYugWsXgevsV0HJo=s160-c-k-c0x00ffffff-no-rj">
+    <script>
+        // ═══════════════════════════════════════════════════════════
+        // 🎵 BACKGROUND MUSIC SETTINGS
+        // ═══════════════════════════════════════════════════════════
+        // To get your SoundCloud URL:
+        // 1. Go to your song on SoundCloud
+        // 2. Click "Share" button
+        // 3. Click "Embed" tab
+        // 4. Copy the URL from the iframe src (the part in quotes after src=)
+        // 5. Paste it below in SOUNDCLOUD_EMBED_URL
+        
+        const MUSIC_SETTINGS = {
+            enabled: true,  // Set to false to disable music
+            autoplay: true, // Auto-play when page loads (may require user click in some browsers)
+            SOUNDCLOUD_EMBED_URL: 'https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/vairek/gotham-love-hoodtrap-prod&color=%23ff5500&auto_play=true&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false'
+        };
 
-<div class="name">ICE,_ud</div>
+        // Load background music
+        if (MUSIC_SETTINGS.enabled && MUSIC_SETTINGS.SOUNDCLOUD_EMBED_URL) {
+            const playerContainer = document.getElementById('soundcloudPlayer');
+            const iframe = document.createElement('iframe');
+            iframe.width = "100%";
+            iframe.height = "166";
+            iframe.scrolling = "no";
+            iframe.frameborder = "no";
+            iframe.allow = "autoplay";
+            iframe.src = MUSIC_SETTINGS.SOUNDCLOUD_EMBED_URL;
+            playerContainer.appendChild(iframe);
+        }
 
-<div class="country">NORWAY</div>
+        // ═══════════════════════════════════════════════════════════
+        // 📝 ADD YOUR LINKS HERE - Just copy and paste this format:
+        // {
+        //     icon: '🤖',
+        //     title: 'Your Link Title',
+        //     description: 'Short description',
+        //     url: 'https://your-link-here.com'
+        // },
+        // ═══════════════════════════════════════════════════════════
+        
+        const LINKS = [
+            {
+                icon: '🤖',
+                title: 'AXIOM AI',
+                description: 'Description for your first link',
+                url: 'https://gofile.io/d/425VJZ'
+            },
+            {
+                icon: '🤖',
+                title: 'AIMMY AI',
+                description: 'Description for your second link',
+                url: 'https://gofile.io/d/tRjpWL'
+            },
+            {
+                icon: '📜',
+                title: 'DOWN!',
+                description: 'Description for your third link',
+                url: 'https://example.com'
+            },
+            {
+                icon: '📜',
+                title: 'DOWN!',
+                description: 'Description for your fourth link',
+                url: 'https://example.com'
+            }
+        ];
 
-<div class="lang">C++ / py / lua</div>
+        // ═══════════════════════════════════════════════════════════
+        // Don't edit below unless customizing design
+        // ═══════════════════════════════════════════════════════════
 
-<div id="counter" class="counter"></div>
+        const container = document.getElementById('linksContainer');
 
-<div class="buttons">
-
-<button onclick="cheats()">CHEATS</button>
-
-<button onclick="spoofer()">SPOOFER</button>
-
-<button onclick="discord()">DISCORD</button>
-
-</div>
-
-<div class="progress">
-<div class="bar" id="bar"></div>
-</div>
-
-<div class="music">
-
-<iframe id="music"
-width="300"
-height="120"
-allow="autoplay"
-src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/fxckfame10/polka-znayu-hoodtrap-remix&auto_play=false">
-</iframe>
-
-</div>
-
-</div>
-
-</div>
-
-<script>
-
-/* ENTER */
-
-function enterSite(){
-
-document.getElementById("enter").style.display="none"
-
-/* start music after click */
-
-document.getElementById("music").src =
-"https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/fxckfame10/polka-znayu-hoodtrap-remix&auto_play=true"
-
-}
-
-/* FAKE USERS */
-
-function updateUsers(){
-
-let users = 1000 + Math.floor(Math.random()*120)
-
-document.getElementById("counter").innerText =
-users + " users online"
-
-}
-
-setInterval(updateUsers,3000)
-
-updateUsers()
-
-/* DOWNLOAD ANIMATION */
-
-function startDownload(link){
-
-let progress=document.querySelector(".progress")
-let bar=document.getElementById("bar")
-
-progress.style.display="block"
-
-let width=0
-
-let interval=setInterval(()=>{
-
-width+=4
-bar.style.width=width+"%"
-
-if(width>=100){
-
-clearInterval(interval)
-
-setTimeout(()=>{
-window.open(link)
-},400)
-
-}
-
-},80)
-
-}
-
-/* BUTTONS */
-
-function cheats(){
-startDownload("https://gofile.io/d/OQtiT6")
-}
-
-function spoofer(){
-startDownload("https://gofile.io/d/9BqRzw")
-}
-
-function discord(){
-window.open("https://discord.gg/nYZZhtYGa4")
-}
-
-/* PARTICLES */
-
-particlesJS("particles-js",{
-particles:{
-number:{value:80},
-size:{value:3},
-move:{speed:1},
-line_linked:{
-enable:true,
-distance:150,
-color:"#5865F2"
-}
-}
-})
-
-</script>
-
+        LINKS.forEach((link, index) => {
+            const card = document.createElement('a');
+            card.className = 'link-card';
+            card.href = link.url;
+            card.target = '_blank';
+            card.rel = 'noopener noreferrer';
+            card.style.animationDelay = `${index * 0.1 + 0.3}s`;
+            
+            card.innerHTML = `
+                <div class="link-icon">${link.icon}</div>
+                <div class="link-title">${link.title}</div>
+                <div class="link-description">${link.description}</div>
+                <div class="link-arrow">→</div>
+            `;
+            
+            container.appendChild(card);
+        });
+    </script>
 </body>
 </html>
